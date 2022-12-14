@@ -8,7 +8,7 @@ function readTheFile(pathName) {
     const readStream = fs.createReadStream(path.join(pathName));
 
     readStream.on('data', (chunk) => {
-      data.push(chunk.toLocaleString());
+      data.push(chunk.toString());
     });
 
     readStream.on('end', () => {
@@ -21,4 +21,4 @@ function readTheFile(pathName) {
   });
 }
 
-module.exports = { readTheFile };
+module.exports = { readTheFile, data };

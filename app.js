@@ -2,21 +2,23 @@ const express = require('express');
 const http = require('http');
 const app = express();
 const { readTheFile } = require('./utils/readAndWriteFile');
+const morgan = require('morgan');
+const routes = require('./routes/root');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
-
 const server = http.createServer(app);
 
-let tours;
+// MIDDLEWARES
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(cors({ origin: ['http://localhost:3000'] }));
 
-app.get('/api/v1/tours', (req, res) => {
-  res
-    .status(200)
-    .json({ status: 'success', result: tours.length, data: { tours } });
-});
+// ROUTES
+app.use(routes);
 
 async function startApp() {
-  tours = await readTheFile(`./${__dirname}/dev-data/data/tours.json`);
+  await readTheFile(`./${__dirname}/dev-data/data/tours.json`);
   server.listen(PORT, () => {
     console.log('Listening...');
   });
