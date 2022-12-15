@@ -7,7 +7,7 @@ const {
   getTour,
   updateTour,
   deleteTour,
-} = require('./toursController');
+} = require('./tours.controller');
 
 toursRoute.param('id', checkID);
 
