@@ -1,8 +1,11 @@
+const Tour = require('../../model/tours.model');
+
 async function getAllUsers(req, res) {
-  res.status(500).json({
-    status: 'error',
-    message: 'Route is not defined yet',
-  });
+  try {
+    const tours = await Tour.find({});
+  } catch (error) {
+    console.log(error);
+  }
 }
 async function createUser(req, res) {
   res.status(500).json({

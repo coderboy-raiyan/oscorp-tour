@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { data } = require('../../utils/readAndWriteFile');
 
-let tours = data;
+const tours = data;
 
 console.log(data);
 
@@ -56,7 +56,7 @@ const createTour = (req, res) => {
   // console.log(req.body);
 
   const newId = tours[tours.length - 1].id + 1;
-  const newTour = Object.assign({ id: newId }, req.body);
+  const newTour = { id: newId, ...req.body };
 
   tours.push(newTour);
 
